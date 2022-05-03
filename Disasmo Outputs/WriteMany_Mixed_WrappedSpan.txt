@@ -1,0 +1,560 @@
+; Method StructWrapper.Benchmarks:WriteMany_Mixed_WrappedSpan():this
+G_M16481_IG01:
+       push     r14
+       push     rdi
+       push     rsi
+       push     rbp
+       push     rbx
+       sub      rsp, 96
+       vzeroupper 
+       vmovaps  qword ptr [rsp+50H], xmm6
+       xor      eax, eax
+       mov      qword ptr [rsp+28H], rax
+       vxorps   xmm4, xmm4
+       vmovdqa  xmmword ptr [rsp+30H], xmm4
+       vmovdqa  xmmword ptr [rsp+40H], xmm4
+       mov      rsi, rcx
+						;; size=49 bbWeight=1    PerfScore 14.08
+
+G_M16481_IG02:
+       mov      rcx, gword ptr [rsi+32]
+       test     rcx, rcx
+       jne      SHORT G_M16481_IG04
+						;; size=9 bbWeight=1    PerfScore 3.25
+
+G_M16481_IG03:
+       xor      rdx, rdx
+       xor      eax, eax
+       jmp      SHORT G_M16481_IG05
+						;; size=6 bbWeight=0.50 PerfScore 1.25
+
+G_M16481_IG04:
+       lea      rdx, bword ptr [rcx+16]
+       mov      eax, dword ptr [rcx+8]
+						;; size=7 bbWeight=0.50 PerfScore 1.25
+
+G_M16481_IG05:
+       lea      rcx, bword ptr [rsp+30H]
+       mov      bword ptr [rcx], rdx
+       mov      dword ptr [rcx+8], eax
+						;; size=11 bbWeight=1    PerfScore 2.50
+
+G_M16481_IG06:
+       vmovdqu  xmm0, xmmword ptr [rsp+30H]
+       vmovdqu  xmmword ptr [rsp+40H], xmm0
+						;; size=14 bbWeight=1    PerfScore 4.00
+
+G_M16481_IG07:
+       xor      edi, edi
+       mov      rcx, 0xD1FFAB1E
+       mov      edx, 4
+       call     CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE
+       cmp      dword ptr [(reloc)], 0
+       jle      G_M16481_IG45
+						;; size=35 bbWeight=1    PerfScore 5.75
+
+G_M16481_IG08:
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       cmp      edi, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edi, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edi
+       mov      ebx, dword ptr [rcx+4*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbp, bword ptr [rcx]
+       mov      r14d, dword ptr [rcx+8]
+       shr      r14d, 2
+       jns      SHORT G_M16481_IG10
+						;; size=55 bbWeight=4    PerfScore 85.00
+
+G_M16481_IG09:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG10:
+       test     r14d, r14d
+       je       G_M16481_IG49
+       mov      dword ptr [rbp], ebx
+       cmp      dword ptr [rsp+48H], 4
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       jns      SHORT G_M16481_IG12
+						;; size=37 bbWeight=4    PerfScore 34.00
+
+G_M16481_IG11:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG12:
+       add      rbx, 4
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       lea      edx, [rdi+1]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       vxorps   xmm6, xmm6
+       vcvtsi2ss xmm6, dword ptr [rcx+4*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbx, bword ptr [rcx]
+       mov      ebp, dword ptr [rcx+8]
+       shr      ebp, 2
+       jns      SHORT G_M16481_IG14
+						;; size=79 bbWeight=4    PerfScore 127.33
+
+G_M16481_IG13:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG14:
+       test     ebp, ebp
+       je       G_M16481_IG49
+       vmovss   dword ptr [rbx], xmm6
+       cmp      dword ptr [rsp+48H], 4
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       jns      SHORT G_M16481_IG16
+						;; size=38 bbWeight=4    PerfScore 38.00
+
+G_M16481_IG15:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG16:
+       add      rbx, 4
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+24]
+       lea      edx, [rdi+2]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       vmovsd   xmm6, qword ptr [rcx+8*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbx, bword ptr [rcx]
+       mov      ebp, dword ptr [rcx+8]
+       shr      ebp, 3
+       jns      SHORT G_M16481_IG18
+						;; size=74 bbWeight=4    PerfScore 106.00
+
+G_M16481_IG17:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG18:
+       test     ebp, ebp
+       je       G_M16481_IG49
+       vmovsd   qword ptr [rbx], xmm6
+       cmp      dword ptr [rsp+48H], 8
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -8
+       jns      SHORT G_M16481_IG20
+						;; size=38 bbWeight=4    PerfScore 38.00
+
+G_M16481_IG19:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG20:
+       add      rbx, 8
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       lea      edx, [rdi+3]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       mov      ebx, dword ptr [rcx+4*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbp, bword ptr [rcx]
+       mov      r14d, dword ptr [rcx+8]
+       shr      r14d, 2
+       jns      SHORT G_M16481_IG22
+						;; size=73 bbWeight=4    PerfScore 98.00
+
+G_M16481_IG21:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG22:
+       test     r14d, r14d
+       je       G_M16481_IG49
+       mov      dword ptr [rbp], ebx
+       cmp      dword ptr [rsp+48H], 4
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       jns      SHORT G_M16481_IG24
+						;; size=37 bbWeight=4    PerfScore 34.00
+
+G_M16481_IG23:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG24:
+       add      rbx, 4
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       lea      edx, [rdi+4]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       vxorps   xmm6, xmm6
+       vcvtsi2ss xmm6, dword ptr [rcx+4*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbx, bword ptr [rcx]
+       mov      ebp, dword ptr [rcx+8]
+       shr      ebp, 2
+       jns      SHORT G_M16481_IG26
+						;; size=79 bbWeight=4    PerfScore 127.33
+
+G_M16481_IG25:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG26:
+       test     ebp, ebp
+       je       G_M16481_IG49
+       vmovss   dword ptr [rbx], xmm6
+       cmp      dword ptr [rsp+48H], 4
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       jns      SHORT G_M16481_IG28
+						;; size=38 bbWeight=4    PerfScore 38.00
+
+G_M16481_IG27:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG28:
+       add      rbx, 4
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+24]
+       lea      edx, [rdi+5]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       vmovsd   xmm6, qword ptr [rcx+8*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbx, bword ptr [rcx]
+       mov      ebp, dword ptr [rcx+8]
+       shr      ebp, 3
+       jns      SHORT G_M16481_IG30
+						;; size=74 bbWeight=4    PerfScore 106.00
+
+G_M16481_IG29:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG30:
+       test     ebp, ebp
+       je       G_M16481_IG49
+       vmovsd   qword ptr [rbx], xmm6
+       cmp      dword ptr [rsp+48H], 8
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -8
+       jns      SHORT G_M16481_IG32
+						;; size=38 bbWeight=4    PerfScore 38.00
+
+G_M16481_IG31:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG32:
+       add      rbx, 8
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       lea      edx, [rdi+6]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       mov      ebx, dword ptr [rcx+4*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbp, bword ptr [rcx]
+       mov      r14d, dword ptr [rcx+8]
+       shr      r14d, 2
+       jns      SHORT G_M16481_IG34
+						;; size=73 bbWeight=4    PerfScore 98.00
+
+G_M16481_IG33:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG34:
+       test     r14d, r14d
+       je       G_M16481_IG49
+       mov      dword ptr [rbp], ebx
+       cmp      dword ptr [rsp+48H], 4
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       jns      SHORT G_M16481_IG36
+						;; size=37 bbWeight=4    PerfScore 34.00
+
+G_M16481_IG35:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG36:
+       add      rbx, 4
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       lea      edx, [rdi+7]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       vxorps   xmm6, xmm6
+       vcvtsi2ss xmm6, dword ptr [rcx+4*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbx, bword ptr [rcx]
+       mov      ebp, dword ptr [rcx+8]
+       shr      ebp, 2
+       jns      SHORT G_M16481_IG38
+						;; size=79 bbWeight=4    PerfScore 127.33
+
+G_M16481_IG37:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG38:
+       test     ebp, ebp
+       je       G_M16481_IG49
+       vmovss   dword ptr [rbx], xmm6
+       cmp      dword ptr [rsp+48H], 4
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       jns      SHORT G_M16481_IG40
+						;; size=38 bbWeight=4    PerfScore 38.00
+
+G_M16481_IG39:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG40:
+       add      rbx, 4
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+24]
+       lea      edx, [rdi+8]
+       cmp      edx, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      edx, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      edx, edx
+       vmovsd   xmm6, qword ptr [rcx+8*rdx+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbx, bword ptr [rcx]
+       mov      ebp, dword ptr [rcx+8]
+       shr      ebp, 3
+       jns      SHORT G_M16481_IG42
+						;; size=74 bbWeight=4    PerfScore 106.00
+
+G_M16481_IG41:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG42:
+       test     ebp, ebp
+       je       G_M16481_IG49
+       vmovsd   qword ptr [rbx], xmm6
+       cmp      dword ptr [rsp+48H], 8
+       jb       G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -8
+       jns      SHORT G_M16481_IG44
+						;; size=38 bbWeight=4    PerfScore 38.00
+
+G_M16481_IG43:
+       mov      rcx, 0xD1FFAB1E      ; ""
+       mov      rdx, gword ptr [rcx]
+       mov      rcx, rdx
+       call     [System.Diagnostics.Debug:Fail(System.String,System.String)]
+						;; size=22 bbWeight=2    PerfScore 11.00
+
+G_M16481_IG44:
+       add      rbx, 8
+       lea      rcx, bword ptr [rsp+40H]
+       mov      bword ptr [rcx], rbx
+       mov      dword ptr [rcx+8], ebp
+       mov      byte  ptr [rsp+28H], 0
+       mov      rcx, gword ptr [rsi+8]
+       lea      eax, [rdi+9]
+       cmp      eax, dword ptr [rcx+16]
+       jae      G_M16481_IG47
+       mov      rcx, gword ptr [rcx+8]
+       cmp      eax, dword ptr [rcx+8]
+       jae      G_M16481_IG49
+       mov      eax, eax
+       mov      ebx, dword ptr [rcx+4*rax+16]
+       lea      rcx, bword ptr [rsp+40H]
+       mov      rbp, bword ptr [rcx]
+       mov      r14d, dword ptr [rcx+8]
+       shr      r14d, 2
+       mov      ecx, r14d
+       not      ecx
+       shr      ecx, 31
+       call     [System.Diagnostics.Debug:Assert(bool)]
+       test     r14d, r14d
+       je       SHORT G_M16481_IG49
+       mov      dword ptr [rbp], ebx
+       cmp      dword ptr [rsp+48H], 4
+       jb       SHORT G_M16481_IG48
+       mov      rbx, bword ptr [rsp+40H]
+       mov      ebp, dword ptr [rsp+48H]
+       add      ebp, -4
+       mov      ecx, ebp
+       not      ecx
+       shr      ecx, 31
+       call     [System.Diagnostics.Debug:Assert(bool)]
+       add      rbx, 4
+       lea      rax, bword ptr [rsp+40H]
+       mov      bword ptr [rax], rbx
+       mov      dword ptr [rax+8], ebp
+       add      edi, 10
+       cmp      edi, dword ptr [(reloc)]
+       jl       G_M16481_IG08
+						;; size=155 bbWeight=4    PerfScore 184.00
+
+G_M16481_IG45:
+       vmovaps  xmm6, qword ptr [rsp+50H]
+       add      rsp, 96
+       pop      rbx
+       pop      rbp
+       pop      rsi
+       pop      rdi
+       pop      r14
+       ret      
+						;; size=18 bbWeight=1    PerfScore 7.75
+
+G_M16481_IG46:
+       call     CORINFO_HELP_OVERFLOW
+						;; size=5 bbWeight=0    PerfScore 0.00
+
+G_M16481_IG47:
+       call     [System.ThrowHelper:ThrowArgumentOutOfRange_IndexMustBeLessException()]
+       int3     
+						;; size=7 bbWeight=0    PerfScore 0.00
+
+G_M16481_IG48:
+       call     [System.ThrowHelper:ThrowArgumentOutOfRangeException()]
+       int3     
+						;; size=7 bbWeight=0    PerfScore 0.00
+
+G_M16481_IG49:
+       call     CORINFO_HELP_RNGCHKFAIL
+       int3     
+						;; size=6 bbWeight=0    PerfScore 0.00
+; Total bytes of code: 1702
+
